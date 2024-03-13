@@ -2,15 +2,31 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class MainController
+class MainController extends AbstractController
 {
-    // #[Route('/')]
-    #[Route(path:'/', name:"home")]
+    #[Route(path:'/', name:"homepage")]
     public function homepage(): Response
     {
-        return new Response('<strong>Starshop</strong>: your monopoly-busting option for Starship parts!');
+        $starshipCount = 457;
+        $carsCount = 2224;
+
+        $myShips = [
+            'name' => 'USS LeafyCruiser (NCC-0001)',
+            'class' => 'Garden',
+            'captain' => 'Jean-Luc Pickles',
+            'status' => 'UNDER CONSTRUCTION',
+        ];
+
+
+        return $this->render('main/homepage.html.twig', [
+            'numberOfStarships' => $starshipCount,
+            'numberOfCars' => $carsCount,
+            'myShip' => $myShips
+        ]);
+
     }
 }
